@@ -1,0 +1,76 @@
+create  database quizes;
+use quizes;
+create table question(
+   id int(11) auto_increment,
+   question varchar(300) ,
+   options1 varchar(300) ,
+   options2 varchar(300) ,
+   options3 varchar(300) ,
+   options4 varchar(300) ,
+	answer int ,
+    primary key(id)
+    );
+insert into question(question,options1,options2,options3,options4,answer)values
+
+("Which is the most sensitive organ in our body?","skin","heart","eye","mouth",1),
+(" Gir National Park in Gujarat is famous for?","tiger","lion","elephant","birds",2),
+("Children’s Day?","14 nov","15 may"," 23 june","13 march",1),
+("How many layers are there in Earth’s atmosphere?","4","5","6","8",2),
+("Tearchers day?","sep 5","oct5","july5","sep 10",4);
+
+select * from question;
+
+
+
+import mysql.connector
+
+mydb=mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="root",
+    database="quizes"
+)
+cursor=mydb.cursor()
+def display_questions(cursor):
+    query=("select * from question")
+    cursor.execute(query)
+    questions= cursor.fetchall()
+    for question in questions:
+        print("Questions:",question[1])
+        print("options:")
+        print("1.",question[2])
+        print("2.",question[3])
+        print("3.",question[4])
+        print("4.",question[5])
+        print()  
+
+def take_quiz(cursor):
+    score=0
+    query=("select * from question")
+    cursor.execute(query)
+    questions=cursor.fetchall()
+    for question in questions:
+        print("Questions:",question[1])
+        print("options:")
+        print("1.",question[2])
+        print("2.",question[3])
+        print("3.",question[4])
+        print("4.",question[5])
+        print()  
+        print("Enter your answer(1-4):")
+        user_ans=int(input())
+        if user_ans==question[0]: 
+            score+=1
+        
+
+    return score
+
+print("welcome the questions")
+print("Here are the questions")
+print()
+print("Questions")
+display_questions(cursor)
+print("answers:")
+user_score=take_quiz(cursor)
+print(user_score)
+
