@@ -7,7 +7,7 @@ create table question(
    options2 varchar(300) ,
    options3 varchar(300) ,
    options4 varchar(300) ,
-	answer int ,
+    answer int ,
     primary key(id)
     );
 insert into question(question,options1,options2,options3,options4,answer)values
